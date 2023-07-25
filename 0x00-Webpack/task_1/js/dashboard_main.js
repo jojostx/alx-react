@@ -12,7 +12,7 @@ let count = 0;
 const updateCounter = (ev) => {
   count += 1;
 
-  $('p#count').append(`${count} clicks on the button`);
+  $('p#count').html(`${count} clicks on the button`);
 }
 
 $('button').on('click', _.debounce(updateCounter, 500));

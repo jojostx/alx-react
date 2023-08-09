@@ -52,14 +52,18 @@ describe("App tests", () => {
   });
 });
 
+document.alert = jest.fn();
 describe("When ctrl + h is pressed", () => {
   it("calls logOut function", () => {
     const mocked = jest.fn();
     const wrapper = mount(<App logOut={mocked} />);
+    const spy = jest.spyOn(window, "alert");
     const event = new KeyboardEvent("keydown", { ctrlKey: true, key: "h" });
     document.dispatchEvent(event);
 
     expect(mocked).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
     wrapper.unmount();
   });
 

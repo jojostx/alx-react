@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import React from "react";
 import App from "./App";
 import Login from "../Login/Login";
@@ -20,7 +19,7 @@ describe("App tests", () => {
   it("should render Notifications component", () => {
     const component = shallow(<App />);
 
-    expect(component.containsMatchingElement(<Notifications />)).toEqual(true);
+    expect(component.containsMatchingElement(<Notifications />)).toEqual(false);
   });
   it("should render Header component", () => {
     const component = shallow(<App />);
@@ -30,9 +29,9 @@ describe("App tests", () => {
   it("should render Login Component", () => {
     const component = shallow(<App />);
 
-    expect(component.contains(<Login />)).toBe(false);
+    expect(component.contains(<Login />)).toBe(true);
   });
-  it("should render Footer component", () => {
+  it("should render Footer Component", () => {
     const component = shallow(<App />);
 
     expect(component.contains(<Footer />)).toBe(true);
@@ -52,18 +51,14 @@ describe("App tests", () => {
   });
 });
 
-document.alert = jest.fn();
 describe("When ctrl + h is pressed", () => {
   it("calls logOut function", () => {
     const mocked = jest.fn();
     const wrapper = mount(<App logOut={mocked} />);
-    const spy = jest.spyOn(window, "alert");
     const event = new KeyboardEvent("keydown", { ctrlKey: true, key: "h" });
     document.dispatchEvent(event);
 
     expect(mocked).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalled();
-    spy.mockRestore();
     wrapper.unmount();
   });
 

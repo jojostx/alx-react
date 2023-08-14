@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Notifications from "../Notifications/Notifications";
+import React from "react";
 import Header from "../Header/Header";
-import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
+import Login from "../Login/Login";
 import CourseList from "../CourseList/CourseList";
+import Notifications from "../Notifications/Notifications";
 import "./App.css";
+import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   listCourses = [
@@ -27,18 +27,18 @@ class App extends Component {
     { id: 3, type: "urgent", html: getLatestNotification() },
   ];
 
-  handleKeyDown(e) {
+  handleKeyPress(e) {
     if (e.ctrlKey && e.key === "h") {
       alert("Logging you out");
       this.props.logOut();
     }
   }
   componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keydown", this.handleKeyPress);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keydown", this.handleKeyPress);
   }
 
   render() {
@@ -49,11 +49,7 @@ class App extends Component {
             <Notifications listNotifications={this.listNotifications} />
             <Header />
           </div>
-          {this.props.isLoggedIn ? (
-            <CourseList listCourses={this.listCourses} />
-          ) : (
-            <Login />
-          )}
+          {this.props.isLoggedIn ? <CourseList listCourses={this.listCourses} /> : <Login />}
           <Footer />
         </div>
       </React.Fragment>
@@ -63,7 +59,9 @@ class App extends Component {
 
 App.defaultProps = {
   isLoggedIn: false,
-  logOut: () => {},
+  logOut: () => {
+    return;
+  },
 };
 
 App.propTypes = {

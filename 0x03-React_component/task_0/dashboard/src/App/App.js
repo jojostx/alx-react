@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Notifications from "../Notifications/Notifications";
+import React from "react";
 import Header from "../Header/Header";
-import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
+import Login from "../Login/Login";
 import CourseList from "../CourseList/CourseList";
+import Notifications from "../Notifications/Notifications";
 import "./App.css";
+import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
 
-class App extends Component {
+class App extends React.Component {
   listCourses = [
     { id: 1, name: "ES6", credit: 60 },
     { id: 2, name: "Webpack", credit: 20 },
